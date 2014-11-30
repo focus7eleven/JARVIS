@@ -1,0 +1,227 @@
+#footer
+{
+	padding: 10px;
+	margin: 10px 20px;
+	font-size: 0.8em;
+	text-align: center;
+	border-top: 1px solid #C9E0ED;
+}
+
+#myRow
+{
+	width:500px; 
+}
+
+#answerInfo
+{
+	width:700px; 
+}
+
+#myColName
+{
+	width:140px;
+	float: left;
+	height:30px;
+}
+
+#myColLike
+{
+	width:170px;
+	float: left;
+	height:30px;
+}
+
+#myColAns
+{
+	width:110px;
+	float: left;
+	height:30px;
+}
+
+#page
+{
+	width:930px;
+	margin-left: auto;
+	margin-right: auto; 
+}
+
+#innerPage
+{
+	width: 930px; 
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 90px; 
+}
+
+#questionPage
+{
+	width: 990px; 
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 90px; 
+}
+
+#hotTopic
+{
+	width:300px;
+	margin-bottom: 20px; 	
+}
+
+#hotTopic
+{
+	width:250px;
+	margin-bottom: 15px; 	
+}
+
+#firstTopic
+{
+	background-color: rgb(240,65,85); 
+}
+
+#secondTopic
+{
+	background-color: rgb(255,128,128); 
+}
+
+#thirdTopic
+{
+	background-color: rgb(255,180,180); 
+}
+
+#signUpPage
+{
+	width:960px;
+	margin-left: auto;
+	margin-right: auto;  
+	margin-top: 50px;
+	padding-bottom: 100px;
+	padding-top: 0px;
+}
+
+.signUpBtn
+{	
+	width:300px; 
+}
+
+#navbarColor
+{ 
+	background-color: rgb(52,73,94);
+}
+
+#questionBtn
+{
+	width:300px;
+	margin-left: 300px;
+	margin-top: 20px;
+	margin-bottom: 50px; 
+}
+
+#questionContent
+{
+	width:660px;
+	float: right;
+	margin-right: 70px;
+	margin-left: 10px;
+	margin-bottom: 20px;
+	font-size: 16px;
+}
+}
+
+#questionPic
+{
+	max-width: 660px;
+	float: right;
+	margin-bottom: 20px; 
+}
+
+#splash
+{
+	width: 700px;
+	border-bottom:2px solid #34495e;
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+
+#answerContent
+{
+	width:660px;
+	float: right;
+	margin-right: 70px;
+	margin-left: 10px;
+	margin-bottom: 20px;
+	font-size: 14px;
+}
+
+#listContent
+{
+	width:660px;
+	float: left;
+	margin-left: 1px;
+	margin-bottom: 14px;
+	font-size: 14px;
+}
+
+#answerBtn
+{
+	width:200px;
+	float: right;
+	margin-bottom: 10px;
+	margin-top: 20px; 
+	margin-right: 20px;
+}
+
+#aColor
+{
+	color: #2c3e50;	
+	font-size:14px;
+	margin-left: 10px;
+	font-weight: bold;
+}
+
+#overflow
+{
+	overflow:ellipsis; 
+}
+
+#pager
+{
+	width:500px;
+	margin-right: auto;
+	margin-left: auto; 
+}
+
+#loginPanel
+{
+	margin-top: 50px; 	
+}
+
+#userInfoPanel
+{
+	margin-top: 80px;
+	margin-left: 70px; 	
+}
+
+#loginBtn
+{
+	width: 100%;	
+}
+
+
+#infoHead
+{
+	width: 60px;
+	margin-right: auto;
+	margin-left: auto; 
+}
+
+
+div.panel
+{
+margin-top: 53px;
+margin-bottom: 0px;
+padding-bottom: :2px;
+text-align:center;
+background:rgb(253,133,133);
+border:solid 1px rgb(253,133,133);
+display:none;
+}
