@@ -93,8 +93,8 @@ function validate_required6(field1,field2)
 	  	return false
 	  }
 	  else {
-	  	document.getElementById('id_sPsw1').className="form-group has-success";
-	  	document.getElementById('id_sPsw2').className="form-group has-success";
+	  	document.getElementById('id_sPsw1').className="form-group";
+	  	document.getElementById('id_sPsw2').className="form-group";
 	  	return true
 	  }
 }
@@ -148,9 +148,32 @@ with(signUpform)
 	  	}else if(flag7==false){
 	  		head.focus();
 	  		return false;
+	  	}else{
+	  		var isExist=false;
+	  		$.ajax(
+	  	    	{
+	  	    		url:"index.php?r=site/signupvalidate&username="+username.value+"&password1="+password1.value,
+	  	    		async:false,
+	  	    		success:function(data){
+	  	    			var data=JSON.parse(data);
+	  	    			//alert(data['result']);
+	  	    			if(data['result']){
+	  	    				document.getElementById('id_sUser').className="form-group has-error";
+	  	    				
+	  	    				$("#id_sameUsernamePanel").slideDown("slow");
+		    				setTimeout(function () { 
+		       					$("#id_sameUsernamePanel").slideUp(1100);
+		    				},2200);
+		    				isExist=false;
+	  	    			}else{
+	  	    				
+	  	    				isExist=true;
+	  	    			}
+					}
+	  	    	});
+	  	    
+	  	    return isExist;
 	  	}
-
-	  	return false;
 }
 }
 

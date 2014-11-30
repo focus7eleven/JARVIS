@@ -7,7 +7,7 @@
   </div>
 </div>
 <div id="signUpPage">
-	<form class="form-horizontal" role="form" action="index.php?r=site/signupvalidate" onsubmit="return validate_signUp(this)" method="post">
+	<form class="form-horizontal" role="form" action="index.php?r=site/adduser" onsubmit="return validate_signUp(this)" method="post" enctype="multipart/form-data">
 	  <div class="form-group" id="id_sUser">
 	    <label class="col-md-4 control-label">用户名</label>
 	    <div class="col-md-4" class="form_group">

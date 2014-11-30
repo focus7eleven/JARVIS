@@ -169,6 +169,7 @@ class SiteController extends CController
     	$model=new LoginForm;
     	$model->username=$username;
         $model->password=$password;
+
         if($model->validate() && $model->login()){
             //$this->redirect(array('site/list'));
             $response=true;
@@ -206,7 +207,39 @@ class SiteController extends CController
     	$this->render('signUp');
     }
 
-    public function actionSignupvalidate(){	
+    public function actionSignupvalidate($username,$password1){	
+    	$model=new Contact;
+    	$model->username=$username;
+        $isExist=Contact::model()->exists('username=:unInput', array(':unInput'=>$username));
+        $json = array (  
+            'result' => $isExist,
+    	);  
+    	$jsonObj = CJSON::encode( $json );
+		echo $jsonObj;
+    }
+
+    public function actionAdduser(){ 	
+    	$model=new Contact;
+    	$model->username=$_POST['username'];
+        $model->password=$_POST['username'];
+        $upload=CUploadedFile::getInstanceByName('head');
+        $model->head=$upload;
+        $model->qNum=0;
+        $model->aNum=0;
+
+        $imgName='head_'.$model->head;
+
+        $model->head->saveAs('uploads/'.$imgName);
+    	$thumb = Yii::app()->thumb;
+        $thumb->image = 'uploads/'.$imgName;
+        $thumb->directory = 'uploads/';
+        $thumb->defaultName = $imgName;
+        $thumb->createThumb();
+        $thumb->save();
+        $model->head=$imgName;
+        $model->save();
+
+        $this->redirect(array('site/index'));
 
     }
 

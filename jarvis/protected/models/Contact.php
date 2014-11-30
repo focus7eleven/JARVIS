@@ -6,6 +6,11 @@ class Contact extends CActiveRecord
 
 	public $password;
 
+	public $head;
+
+	public $qNum;
+
+	public $aNum;
 
 	public static function model($className=__CLASS__)
 	{
@@ -22,6 +27,9 @@ class Contact extends CActiveRecord
         return array(
             'username' => 'Username',
             'password' => 'Password',
+            'head' => 'Portrait',
+            'qNum' => 'Questions',
+            'aNum' => 'Answers'
         );
     }
 

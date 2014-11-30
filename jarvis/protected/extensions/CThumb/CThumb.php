@@ -209,13 +209,13 @@ class CThumb extends CApplicationComponent {
  
           switch ($this->srcType) {
           case IMAGETYPE_JPEG:
-          imagejpeg($this->thumbImage, $this->directory . $this->prefix . $this->defaultName . $this->suffix . "." . $this->srcExt, $this->quality);
+          imagejpeg($this->thumbImage, $this->directory . $this->prefix . $this->defaultName . $this->suffix, $this->quality);
           break;
           case IMAGETYPE_GIF:
-          imagegif($this->thumbImage, $this->directory . $this->prefix . $this->defaultName . $this->suffix . "." . $this->srcExt, $this->quality);
+          imagegif($this->thumbImage, $this->directory . $this->prefix . $this->defaultName . $this->suffix, $this->quality);
           break;
           case IMAGETYPE_PNG:
-          imagepng($this->thumbImage, $this->directory . $this->prefix . $this->defaultName . $this->suffix . "." . $this->srcExt, $this->compression);
+          imagepng($this->thumbImage, $this->directory . $this->prefix . $this->defaultName . $this->suffix, $this->compression);
           break;
           }
     }

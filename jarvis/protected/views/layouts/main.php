@@ -51,6 +51,10 @@ $(document).ready(function(){
 </head>
 <body>
 
+<div class="panel" id="id_sameUsernamePanel">
+	用户名已存在，请重新输入
+</div>
+
 <div class="panel" id="id_signUpPanel">
 	两次输入的密码不一致
 </div>
