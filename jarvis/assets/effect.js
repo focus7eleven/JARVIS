@@ -9,7 +9,6 @@ function mOut(id)
 }
 
 
-
 function validate_required1(field)
 {
 with (field)
@@ -114,7 +113,99 @@ with (field)
   }
 }
 
+function validate_required8(field)
+{	
+  	if(field.name=='qname'){
+  	  	if(field.value==""){ 
+  	  		document.getElementById('id_qName').className="form-group has-error";
+	  		return false
+  	  	}else{
+			document.getElementById('id_qName').className="form-group";
+	  		return true
+  	  	}	
+  	}else if(field.name=='qtag'){ 
+  	  	if(field.value==""){ 
+  	  		document.getElementById('id_qTag').className="form-group has-error";
+	  		return false
+  	  	}else{
+			document.getElementById('id_qTag').className="form-group";
+	  		return true
+  	  	}				
+  	}else if(field.name=='qcontent'){ 
+  	  	if(field.value==""){ 
+  	  		document.getElementById('id_qContent').className="form-group has-error";
+	  		return false
+  	  	}else{
+			document.getElementById('id_qContent').className="form-group";
+	  		return true
+  	  	}		
+  	}
+}
 
+
+function validate_like()
+{
+	var qname=document.getElementById('id_qname').innerHTML;
+	var qtime=document.getElementById('id_qtime').innerHTML;
+	$.ajax(
+		{
+			url:"index.php?r=detail/questionlike&qname="+qname+"&qtime="+qtime,
+			async:false,
+			success:function(data){
+				var data=JSON.parse(data);
+				if(!data['result']){
+					//alert(data['q'])
+					$("#id_qlike").fadeOut("slow");
+  					$("#id_qliked").fadeIn(2500);
+				}else{
+					alert(data['result']);
+				}
+		}
+	});
+	  	
+}
+
+function cancel_like()
+{
+	var qname=document.getElementById('id_qname').innerHTML;
+	var qtime=document.getElementById('id_qtime').innerHTML;
+	$.ajax(
+		{
+			url:"index.php?r=detail/cancellike&qname="+qname+"&qtime="+qtime,
+			async:false,
+			success:function(data){
+				var data=JSON.parse(data);
+				if(data['result']){					
+  					$("#id_qliked").fadeOut("slow");
+  					$("#id_qlike").fadeIn(2500);
+				}else{
+					alert(data['result']);
+				}
+		}
+	});
+}
+
+function validate_questionform(questionform)
+{
+with(questionform)
+{
+	var flag1=validate_required8(qname);
+	var flag2=validate_required8(qtag);
+	var flag3=validate_required8(qcontent);
+	if(flag1==false){ 
+		qname.focus();
+		return false;
+	}else if(flag2==false){ 
+		qtag.focus();
+		return false;
+	}else if(flag3==false){ 
+		qcontent.focus();
+		return false;
+	}else if(flag1&&flag2&&flag3){ 
+		return true;
+	}
+} 
+}
 
 
 function validate_signUp(signUpform)

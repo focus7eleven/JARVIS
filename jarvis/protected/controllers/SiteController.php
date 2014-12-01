@@ -108,28 +108,21 @@ class SiteController extends CController
     			if($model->validate())
     			{
     				$model->qpic->saveAs('uploads/'.$imgName);
-    				$thumb = Yii::app()->thumb;
-                    $thumb->image = 'uploads/'.$imgName;
-                    $thumb->directory = 'uploads/';
-                    $thumb->defaultName = $imgName.'_thumb';
-                    $thumb->createThumb();
-                    $thumb->save();
     			}
     			$model->qpic=$imgName;
     			$question->qpic=$imgName;
     		}
-    		
-    		
-
-	    	
-	    	if($model->validate())
-	    	{	 
+	    	if($model->validate()){	 
 	    		$flag=false;   		
-	    		//$question->save();
+	    		$question->save();
 	    		$this->render('questionmodal',array('model'=>$question));
+	    	}else{ 
+	    		echo "error";
 	    	}
     	}
     	}
+
+    	//导航栏入口
     	$entrance=0;
     	if($entrance==0){
     	if($flag)
@@ -138,6 +131,8 @@ class SiteController extends CController
     	}
     	}
     }
+
+
 
    //public function actionQuestionDetail($qname)
     //{
@@ -221,7 +216,7 @@ class SiteController extends CController
     public function actionAdduser(){ 	
     	$model=new Contact;
     	$model->username=$_POST['username'];
-        $model->password=$_POST['username'];
+        $model->password=$_POST['password1'];
         $upload=CUploadedFile::getInstanceByName('head');
         $model->head=$upload;
         $model->qNum=0;

@@ -1,7 +1,8 @@
 
 <div id="innerPage">
-<form role="form" class="form-horizontal" action="index.php?r=site/question&entrance=1" method="post" enctype="multipart/form-data">
-  <div class="form-group">
+<form role="form" class="form-horizontal" action="index.php?r=site/question&entrance=1" onsubmit="return validate_questionform(this)" method="post" enctype="multipart/form-data">
+  
+  <div class="form-group" id="id_qName">
 	<div class="row">
 	  	<div class="col-md-1 control-label">
 	    	<label for="qname">标题</label>
@@ -14,7 +15,7 @@
     
   </div>
 
-  <div class="form-group">
+  <div class="form-group" id="id_qTag">
   	<div class="row">
 	  	<div class="col-md-1 control-label">
 	    	<label for="qtag">标签</label>
@@ -27,7 +28,7 @@
 	</div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" id="id_qPic">
     <div class="row">
 	  	<div class="col-md-1 control-label">
 	    	<label for="qpic">图片</label>
@@ -41,7 +42,7 @@
   </div>
 
 
-  <div class="form-group">
+  <div class="form-group" id="id_qContent">
   	<div class="row">
 	  	<div class="col-md-1 control-label">
 	    	<label for="qcontent">描述</label>

@@ -5,24 +5,34 @@
 	
 
 		<div class="row"> 
-			<?php 
-				/*$arr = explode(",",$model->qtag);
-				foreach($arr as $u){
-					echo '<span class="label label-primary">'.$u.'</span>';
-			    }*/
-			?>
 
-			<h4><span class="fui-arrow-right"></span>&nbsp&nbsp 今天怎么不开心</h4>
+
+			<h4><span class="fui-arrow-right"></span>&nbsp&nbsp <?php echo $model->qname; ?></h4>
+			<div id="id_qname" style="display:none"><?php echo $model->qname; ?></div>
+
 			<span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
 
-			<span class="fui-user"> Focus</span>
+			<span class="fui-user"> <?php echo $model->quser; ?></span>
 			<span>&nbsp&nbsp|&nbsp&nbsp</span>
-			<span class="fui-time"> 2014.11.12</span>
+
+			<span class="fui-time"> <?php echo $model->qtime; ?></span>
+			<div id="id_qtime" style="display:none"><?php echo $model->qtime; ?></div>
+
 			<span>&nbsp&nbsp|&nbsp&nbsp</span>
-			<a href="#"><span class="fui-heart"> 42</span></a>
-			<span>&nbsp&nbsp|&nbsp&nbsp</span>			
-			<span class="label label-primary">TAG1</span>
-			<span class="label label-primary">TAG2</span>
+
+
+			<a href="#"><span class="fui-heart" onclick="validate_like()" id="id_qlike"> <?php echo $model->qlike; ?> </span></a>
+			<a href="#"><span class="fui-check" onclick="cancel_like()" style="display:none" id="id_qliked"> 取消赞</span></a>
+			<span>&nbsp&nbsp|&nbsp&nbsp</span>
+
+			<?php
+				$tag=explode(",",$model->qtag);
+				foreach ($tag as $value) {
+					echo '<span class="label label-primary">'.$value.'</span>' ;
+					echo '&nbsp';
+				}	
+			?>			
+
 			
 		</div>
 
@@ -33,20 +43,26 @@
 			<span class="fui-new"></span>
 			
 			<div id="questionContent">
-				Feels like a close, it’s coming to感觉被封闭一样，未来会怎样Fuck am I gonna do? / It*s too late to start over我他妈该怎么办，重新开始太晚了this is the only thing I, thing I know这是我唯一，我唯一知道的事Verse1:EminemSometimes i feel like all I ever do is 有时候我觉得我所做所有事的就是Find different ways to word the same, old song寻找不同的方式来表达相同的东西，老调重弹Ever since I came along自从我独自到来
-				From the day the song called ‘’Hi! My Name Is’’ dropped自从my name is这首歌横空出世Started thinking my name was fall 开始思考我的名字是不是开始过气Cause anytime things went wrong
-				因为每次出事I was the one who they would blame it on我就是那个被指责的那个The media made me the equivalent of a modern-day Genghis Kahn媒体将我塑造成当代的成吉思汗Tried to argue it was only entertainment, dawg我试图辩称这只是娱乐，哥们儿Gangsta? Naw, courageous balls
-				黑帮，不，我只是有勇气罢了Had to change my style, they said I*m way too soft 
-				应该改变我的风格，他们说我的唱法太软了And I sound like AZ and Nas, out came the claws
+				<?php echo $model->qcontent; ?>
 			</div>	
 		</div>
 
-		<div class="row">
-			<span class="fui-image"></span>
-			<div id="questionContent">
-				<img src="uploads/right.jpg" alt="image" class="img-rounded img-responsive">
-			</div>
-		</div>
+		<?php
+			if($model->qpic){
+				echo '
+				<div class="row">
+					<span class="fui-image"></span>
+					<div id="questionContent">
+						<img src="uploads/'.$model->qpic.'" alt="image" class="img-rounded img-responsive">
+					</div>
+				</div>
+				'; 
+			}else{ 
+
+			} 
+		?>
+		
+
 		<div id="splash"></div>
 
 		<div class="row">
