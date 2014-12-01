@@ -80,7 +80,7 @@ $(document).ready(function(){
     			<li id="id_home" onclick="changeState(id_home)" onmouseover="mOver(id_home)" onmouseout="mOut(id_home)"><a href="index.php">主页</a></li>
     	        <li id="id_ask" onclick="isGuest(id_ask)" onmouseover="mOver(id_ask)" onmouseout="mOut(id_ask)"><a>提问</a></li>
     	        <li><a href="index.php?r=site/questionDetail">提问跳转</a></li>
-    	        <li id="id_list" onclick="changeState(id_list)" onmouseover="mOver(id_list)" onmouseout="mOut(id_list)"><a href="index.php?r=site/list">话题动态</a></li>
+    	        <li id="id_list" onclick="changeState(id_list)" onmouseover="mOver(id_list)" onmouseout="mOut(id_list)"><a href="index.php?r=site/list&pageNum=1">话题动态</a></li>
     	      	</ul>
     				
     				<?php

@@ -148,11 +148,25 @@ class SiteController extends CController
     	$this->render('questionmodal');
     }
 
-    public function actionList()
+    public function actionList($pageNum)
     {
-    	//$question=Question::model()->find('qname=:postID', array(':postID'=>$qname));
+    	$question=Question::model()->findAll();
+    	$total=count($question);
+    	$last=fmod($total,5);
+    	$pages=(int)($total/5);
+    	
+    	echo $pages;
+    	if($last>0){ 
+    		$pages=$pages+1;
+    	}
+    	if($pageNum*5<=$total){
+    		$slice_question=array_slice($question,5*($pageNum-1),5*$pageNum);
+		}else{
+			$slice_question=array_slice($question,5*($pageNum-1)); 
+		}
+
     	//$this->render('questionmodal',array('model'=>$question));
-    	$this->render('list');
+    	$this->render('list',array('pages'=>$pages));
     }
 
     public function actionLogin(){
