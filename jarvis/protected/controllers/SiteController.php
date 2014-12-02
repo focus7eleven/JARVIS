@@ -24,7 +24,7 @@ class SiteController extends CController
 
 
         // collect user input data
-        if(isset($_POST['LoginForm']))
+        /*if(isset($_POST['LoginForm']))
         {
             $model->attributes=$_POST['LoginForm'];
             // validate user input and redirect to the previous page if valid
@@ -47,7 +47,7 @@ class SiteController extends CController
             }
                 //$this->createUrl('site/index',array('name'=>$model->username));
                 //$this->render('brooklyn',array('model'=>$model,'contact'=>$c));
-        }
+        }*/
         // display the login form
 
 
@@ -159,9 +159,14 @@ class SiteController extends CController
                                 'qname' => $qname, 
                                 'qtime' => $qtime
         ));
+
+    	$ans = Answer::model()->findAll('qnum=:qNum' , array(':qNum'=>$question->qnum));
+
+    	$ans=array_reverse($ans);
+
     	//$question=Question::model()->find('qname=:postID', array(':postID'=>$qname));
     	//$this->render('questionmodal',array('model'=>$question));
-    	$this->render('questionmodal',array('model'=>$question));
+    	$this->render('questionmodal',array('model'=>$question,'ans'=>$ans));
     }
 
     public function actionList($pageNum)
@@ -186,7 +191,13 @@ class SiteController extends CController
     }
 
     public function actionLogin(){
+
         $questionList=Question::model()->findall();
+
+        /*$user=Yii::app()->user->name;
+        $ques = Question::model()->findAll('quser=:qUser' , array(':qUser' => $user ));
+        Yii::app()->session['question']=$ques;
+        $temp=count(Yii::app()->session['question']);*/
 
         $this->render('index',array('questionList'=>$questionList));     
     }
@@ -225,6 +236,8 @@ class SiteController extends CController
     public function actionLogout()
     {
         Yii::app()->user->logout();
+        Yii::app()->session->clear();
+		Yii::app()->session->destroy();
         $this->redirect(Yii::app()->homeUrl);
     }
 
@@ -254,15 +267,24 @@ class SiteController extends CController
         $model->qNum=0;
         $model->aNum=0;
 
-        $imgName='head_'.$model->username.'.jpg';
+        $imgName=$model->username.'.jpg';
 
         $model->head->saveAs('uploads/'.$imgName);
+
     	$thumb = Yii::app()->thumb;
         $thumb->image = 'uploads/'.$imgName;
         $thumb->directory = 'uploads/';
-        $thumb->defaultName = $imgName;
+        $thumb->defaultName = 'head_'.$imgName;
         $thumb->createThumb();
         $thumb->save();
+
+        $bigThumb = Yii::app()->bigThumb;
+        $bigThumb->image = 'uploads/'.$imgName;
+        $bigThumb->directory = 'uploads/';
+        $bigThumb->defaultName = 'home_'.$imgName;
+        $bigThumb->createThumb();
+        $bigThumb->save();
+
         $model->head=$imgName;
         $model->save();
 
@@ -280,11 +302,12 @@ class SiteController extends CController
 
         $answer=new Answer;
         $answer->acontent=$content;
+        $answer->qnum=$question->qnum;
         $answer->auser=Yii::app()->user->name;
         $answer->alike=0;
         date_default_timezone_set('Asia/Shanghai');
     	$answer->atime=date('H:i:s M.d');
-    	$answer->anum=$question->qnum;
+    	
 
     	$question->update();
 
@@ -296,6 +319,10 @@ class SiteController extends CController
     	);  
     	$jsonObj = CJSON::encode( $json );
 		echo $jsonObj;
+    }
+
+    public function actionPerson(){ 
+    	$this->render('person');
     }
 
 

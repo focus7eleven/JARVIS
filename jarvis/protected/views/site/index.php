@@ -32,7 +32,7 @@
 	    		'
 	    		<div class="col-md-3" id="userInfoPanel">
 	    			<div id="infoHead">
-			    		<img src="uploads/myThumb.jpg" alt="uploads/myThumb.jpg">
+			    		<img src="uploads/head_jayz.jpg" alt="uploads/head_tara.jpg">
 			    	</div>
 			    	<div style="text-align: center">
 			    		'.Yii::app()->user->name.'
@@ -82,7 +82,7 @@
 				    		?>
 				    		</span>
 			    		</div>
-			    		<div id="myColLike">
+			    		<div id="myColTime">
 			    			<span class="fui-time"> 2014.11.14</span>
 				    		
 			    		</div>
@@ -115,7 +115,7 @@
 				    		?>
 				    		</span>
 			    		</div>
-			    		<div id="myColLike">
+			    		<div id="myColTime">
 			    			<span class="fui-time"> 2014.11.14</span>
 				    		
 			    		</div>
@@ -148,7 +148,7 @@
 				    		?>
 				    		</span>
 			    		</div>
-			    		<div id="myColLike">
+			    		<div id="myColTime">
 			    			<span class="fui-time"> 2014.11.14</span>
 				    		
 			    		</div>

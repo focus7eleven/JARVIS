@@ -6,6 +6,7 @@ class Answer extends CActiveRecord
 
 	public $acontent;
 	public $anum;
+	public $qnum;
 	public $auser;
 	public $alike;
 	public $atime;

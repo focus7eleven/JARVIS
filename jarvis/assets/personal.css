@@ -7,6 +7,17 @@
 	border-top: 1px solid #C9E0ED;
 }
 
+#id_signUpLogo1
+{
+	float: left; 
+	position: relative;
+}
+#id_signUpLogo2
+{
+	float: right;
+	position: relative;
+}
+
 #myRow
 {
 	width:500px; 
@@ -33,7 +44,7 @@
 
 #myColLike
 {
-	width:140px;
+	width:100px;
 	float: left;
 	height:30px;
 }
@@ -208,6 +219,12 @@
 	margin-left: 70px; 	
 }
 
+#homePersonPanel
+{
+	margin-top: 80px;
+	margin-right: 70px; 	
+}
+
 #loginBtn
 {
 	width: 100%;	
@@ -215,6 +232,13 @@
 
 
 #infoHead
+{
+	width: 60px;
+	margin-right: auto;
+	margin-left: auto; 
+}
+
+#homePersonHead
 {
 	width: 60px;
 	margin-right: auto;

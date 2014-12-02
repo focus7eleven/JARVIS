@@ -1,9 +1,26 @@
+<script type="text/javascript">
+window.onload=function()
+{
+    $("#id_signUpLogo1").animate({left:'423px'});
+    $("#id_signUpLogo2").animate({left:'-443px'});
+}
+</script>
 <div class="jumbotron">
   <div class="container">
-    <h1>J.A.R.V.I.S.</h1>
-    <p>
-    	No smoking, unless you want.
-    </p>
+  	<div class="row">
+  		<div id="id_signUpLogo1">
+		    <h1>J.A.R.</h1>
+		    <p>
+		    	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNo smoking,
+		    </p>
+	    </div>
+	    <div id="id_signUpLogo2">
+		    <h1>V.I.S.</h1>
+		    <p>
+		    	 unless you want.
+		    </p>
+	    </div>
+    </div>
   </div>
 </div>
 <div id="signUpPage">

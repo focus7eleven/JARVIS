@@ -45,6 +45,12 @@
  				'class'=>'ext.CThumb.CThumb',
  			),
 
+ 			'bigThumb'=>array(
+ 				'class'=>'ext.CThumb.BigCThumb',
+ 			),
+
+ 			
+
 		),
 
 		'controllerMap'=>array(

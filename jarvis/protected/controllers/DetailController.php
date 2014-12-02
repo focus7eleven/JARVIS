@@ -71,6 +71,34 @@ class DetailController extends CController
 
 		echo $jsonObj;
 	}
+
+	public function actionNewMessage(){ 
+		$user=Yii::app()->user->name;
+		if(!Yii::app()->user->isGuest){ 
+			$ques = Question::model()->findAll('quser=:qUser' , array(':qUser' => $user ));
+			$quesHistory=Yii::app()->session['question'];
+			$length=count($quesHistory);
+
+			$flag=false;
+
+			for($i=0;$i<$length;$i++){ 
+				if($quesHistory[$i]->qlike<$ques[$i]->qlike){ 
+					$flag=true;
+				}
+				if($quesHistory[$i]->qans<$ques[$i]->qans){ 
+					$flag=true;
+				}
+			}
+
+			$json = array (  
+            	'result' => $flag,
+            	'num' => $quesHistory[0]->qlike,
+    		);  
+    		$jsonObj = CJSON::encode( $json );
+
+			echo $jsonObj;
+		}
+	}
 }
 
 ?>

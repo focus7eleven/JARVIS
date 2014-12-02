@@ -68,9 +68,9 @@ $(document).ready(function(){
 	请先登录
 </div>
 
-<div class="paneltest" id="id_test">
+<!--<div class="paneltest" id="id_test">
 	1
-</div>
+</div> -->
 
 
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -98,7 +98,12 @@ $(document).ready(function(){
     						echo
     						'<ul class="nav navbar-nav navbar-right">
     		    				<li><a href="index.php?r=site/logout"><span class="fui-power"></span></a></li>
-    	      			</ul>';
+    	      				</ul>';
+    						echo
+    						'<ul class="nav navbar-nav navbar-right">
+    		    				<li><a href="index.php?r=site/person"><span class="fui-home"></span></a></li>
+    	      				</ul>';
+    						
     					}
     				?>
     
@@ -127,27 +132,9 @@ $(document).ready(function(){
 		<?php echo Yii::powered(); ?>
 	</div><!-- footer -->
 
-<script type="text/javascript"> 
-    Concurrent.Thread.create(function(){ 
-        var i = 0; 
-        while ( 1 ) { 
-            
-            setTimeout(function () { 
-		        document.getElementById('id_test').innerHTML=i;
-            i++;
-		    },3000);
-        } 
-    }); 
-</script> 
+
+
 </body>
 
-<script type="text/javascript">
 
-	$(".media-body").each(function(i){
-    var divH = $(this).height();
-    var $h5 = $("h5", $(this)).eq(0);
-    while ($h5.outerHeight() > divH) {
-        $h5.text($h5.text().replace(/(\s)*([a-zA-Z0-9]+|\W)(\.\.\.)?$/, "..."));
-    };
-</script>
 </html>

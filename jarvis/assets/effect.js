@@ -402,21 +402,26 @@ function validate_answer()
 			setTimeout(function () { 
 				$("#id_nullAnswer").slideUp(1100);
 			},2200);
-		}else{ 
+		}else{
+			var flag=false; 
 			$.ajax(
 	  	    	{
 	  	    		url:"index.php?r=site/answer&content="+content+"&qname="+qname+"&qtime="+qtime,
 	  	    		async:false,
 	  	    		success:function(data){
 	  	    			var data=JSON.parse(data);
-	  	    			//alert(data['result']);
+	  	    			
 	  	    			if(data['result']){
-	  	    				alert(data['content']);
+	  	    				flag=true;
 	  	    			}else{
 	  	    				
 	  	    			}
 					}
 	  	    });
+	  	    if(flag){ 
+	  	    	window.location.href="index.php?r=site/questionDetail&qname="+qname+"&qtime="+qtime;
+	  	    }
+	  	    	
 		}
 	}else{
 		$("#id_isGuest").slideDown("slow");

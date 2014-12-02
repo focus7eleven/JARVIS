@@ -73,74 +73,43 @@
 		</div>
 <h5></h5>
 
-		<div class="row">
-			<div class="media">
-		  		<a class="media-left">
-		    		<img src="uploads/head_focus.jpg" alt="uploads/myThumb.jpg">
-		  		</a>
-		  		<div class="media-body">
-		  			<div id="answerContent">我试图辩称这只是娱乐，哥们儿Gangsta? Naw, courageous balls
-				黑帮，帮，不，我只是有勇气罢了Had to change my style, they said I*m way too soft 帮，不，我只是有勇气罢了Had to change my style, they said I*m way too soft 
-				应该改变我的风帮，不，我只是有勇气罢了Had to change my style, they said I*m way too soft 
-				应该改变我的风帮，不，我只是有勇气罢了Had to change my style, they said I*m way too soft 
-				应该改变我的风
-				应该改变我的风不，我只是有勇气罢了Had to change my style, they said I*m way too soft 
-				应该改变我的风格，他们说我的唱法太软了And I sound like AZ and Nas, out came the claws</div>		
-					<div id="answerInfo">
-						<div id="myColName">
-				    		<span class="fui-user">
-				    		Focus
-				    		</span>
-			    		</div>
-			    		<div id="myColLike">
-			    			<span class="fui-time"> 2014.11.14</span>
-				    		
-			    		</div>
-			    		<div id="myColLike">
-				    		<a href="#"><span class="fui-heart"> 42</span></a>
-			    		</div>
-			    		
-		    		</div>
-		  		</div>
-			</div>
-		</div>
-		<HR>
-		<div class="row">
-			<div class="media">
-		  		<a class="media-left">
-		    		<img src="uploads/myThumb.jpg" alt="uploads/myThumb.jpg">
-		  		</a>
-		  		<div class="media-body">
-		  			<div id="answerContent">我试图辩称这只是娱乐，哥们儿Gangsta? Naw, courageous balls
-				黑帮，帮，不，我只是有勇气罢了Had to change my style, they said I*m way too soft 帮，不，我只是有勇气罢了Had to change my style, they said I*m way too soft 
-				应该改变我的风帮，不，我只是有勇气罢了Had to change my style, they said I*m way too soft 
-				应该改变我的风帮，不，我只是有勇气罢了Had to change my style, they said I*m way too soft 
-				应该改变我的风
-				应该改变我的风不，我只是有勇气罢了Had to change my style, they said I*m way too soft 
-				应该改变我的风格，他们说我的唱法太软了And I sound like AZ and Nas, out came the claws</div>		
-					<div id="answerInfo">
-						<div id="myColName">
-				    		<span class="fui-user">
-				    		Focus
-				    		</span>
-			    		</div>
-			    		<div id="myColLike">
-			    			<span class="fui-time"> 2014.11.14</span>
-				    		
-			    		</div>
-			    		<div id="myColLike">
-				    		<a href="#"><span class="fui-heart"> 42</span></a>
-			    		</div>
-			    		
-		    		</div>
-		  		</div>
-			</div>
-		</div>
+		<?php
+			foreach ($ans as $a) {
+			 	echo '
+			 		<div class="row">
+						<div class="media">
+					  		<a class="media-left">
+					    		<img src="uploads/head_'.$a->auser.'.jpg" alt="uploads/myThumb.jpg">
+					  		</a>
+					  		<div class="media-body">
+					  			<div id="answerContent">'.$a->acontent.'</div>		
+								<div id="answerInfo">
+									<div id="myColName">
+							    		<span class="fui-user">
+							    		'.$a->auser.'
+							    		</span>
+						    		</div>
+						    		<div id="myColTime">
+						    			<span class="fui-time"> '.$a->atime.'</span>							    
+						    		</div>
+						    		<div id="myColLike">
+							    		<a href="#"><span class="fui-heart"> '.$a->alike.'</span></a>
+						    		</div>
+						    		
+					    		</div>
+					  		</div>
+						</div>
+					</div>
+					<HR>
+			 	';
+			}
 
+			if(count($ans)==0){ 
+				echo '';
+			} 
+		?>
 
-
-
-
+		
 
 
 		<div id="splash"></div>
