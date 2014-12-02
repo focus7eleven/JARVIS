@@ -69,10 +69,11 @@
 			<h4><span class="fui-arrow-right"></span>&nbsp&nbsp 回答</h4>
 		</div>
 <h5></h5>
+
 		<div class="row">
 			<div class="media">
 		  		<a class="media-left">
-		    		<img src="uploads/myThumb.jpg" alt="uploads/myThumb.jpg">
+		    		<img src="uploads/head_focus.jpg" alt="uploads/myThumb.jpg">
 		  		</a>
 		  		<div class="media-body">
 		  			<div id="answerContent">我试图辩称这只是娱乐，哥们儿Gangsta? Naw, courageous balls

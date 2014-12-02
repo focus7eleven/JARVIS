@@ -100,7 +100,7 @@ class SiteController extends CController
     		$question->qans=0;
     		$question->qtag=$model->qtag;
     		date_default_timezone_set('Asia/Shanghai');
-    		$question->qtime=date('H:i:s M.d Y');
+    		$question->qtime=date('H:i:s M.d');
     		if($model->qpic)
     		{
     			$preRand='img_'.time(). mt_rand(0,99);
@@ -141,21 +141,24 @@ class SiteController extends CController
     	//$this->render('questionmodal');
     //}
 
-    public function actionQuestionDetail()
+    public function actionQuestionDetail($qname,$qtime)
     {
+    	$question = Question::model()->findByAttributes(array (
+                                'qname' => $qname, 
+                                'qtime' => $qtime
+        ));
     	//$question=Question::model()->find('qname=:postID', array(':postID'=>$qname));
     	//$this->render('questionmodal',array('model'=>$question));
-    	$this->render('questionmodal');
+    	$this->render('questionmodal',array('model'=>$question));
     }
 
     public function actionList($pageNum)
     {
-    	$question=Question::model()->findAll();
+     	$question=Question::model()->findAll();
+    	$question=array_reverse($question);
     	$total=count($question);
     	$last=fmod($total,5);
     	$pages=(int)($total/5);
-    	
-    	echo $pages;
     	if($last>0){ 
     		$pages=$pages+1;
     	}
@@ -165,8 +168,9 @@ class SiteController extends CController
 			$slice_question=array_slice($question,5*($pageNum-1)); 
 		}
 
+
     	//$this->render('questionmodal',array('model'=>$question));
-    	$this->render('list',array('pages'=>$pages));
+    	$this->render('list',array('pages'=>$pages,'questions'=>$slice_question,'pageNum'=>$pageNum));
     }
 
     public function actionLogin(){
@@ -236,7 +240,7 @@ class SiteController extends CController
         $model->qNum=0;
         $model->aNum=0;
 
-        $imgName='head_'.$model->head;
+        $imgName='head_'.$model->username.'.jpg';
 
         $model->head->saveAs('uploads/'.$imgName);
     	$thumb = Yii::app()->thumb;

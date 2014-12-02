@@ -1,11 +1,25 @@
 <script type="text/javascript">
 window.onload=function()
 {
-    $("#id_first").fadeIn(1000);
+    $("#id_1").fadeIn(1000);
     setTimeout(function () { 
-		$("#id_second").fadeIn(1000);
-	},300);
+		$("#id_2").fadeIn(1000);
+	},200);
+	setTimeout(function () { 
+		$("#id_3").fadeIn(1000);
+	},400);
+	setTimeout(function () { 
+		$("#id_4").fadeIn(1000);
+	},600);
+	setTimeout(function () { 
+		$("#id_5").fadeIn(1000);
+	},800);
+	setTimeout(function () { 
+		$("#pager").fadeIn(1000);
+	},1000);
    
+    var present=document.getElementById('id_prePage').innerHTML;
+    
 }
 </script>
 
@@ -19,95 +33,60 @@ window.onload=function()
 
 			<h1></h1>
 
-			<div class="media" id="id_first" style="display:none">
-		  		<a class="media-left">
-		    		<img src="uploads/myThumb.jpg" alt="uploads/myThumb.jpg">
-		  		</a>
-		  		<div class="media-body">
-		  			<h4 class="media-heading"><a href="">我的滑板鞋</a></h4>
-		  			<div id="listContent">我试图辩称这只是娱乐，哥们儿Gangsta? Naw, courageous balls
-						黑帮，帮，不，我只是有勇气罢了Had to change my style, they said I*m way too soft 帮，不，我只是有勇气罢了Had to change my style, they said I*m way too soft 
-						应该改变我的风帮，不，我只是有勇气罢了Had to change my style, they said I*m way too soft 
-						应该改变我的风帮，不，我只是有勇气罢了Had to change my style, they said I*m way too soft 
-						应该改变我的风
-						应该改变我的风不，我只是有勇气罢了Had to change my style, they said I*m way too soft 
-						应该改变我的风格，他们说我的唱法太软了And I sound like AZ and Nas, out came the claws
-					</div>		
-					<div id="answerInfo">
-						<div id="myColName">
-				    		<span class="fui-user">
-				    		Focus
-				    		</span>
-			    		</div>
-			    		<div id="myColLike">
-			    			<span class="fui-time"> 2014.11.14</span>
-				    		
-			    		</div>
-			    		<div id="myColAns">
-				    		<span class="fui-new"> 3</span>
-			    		</div>
-			    		<div id="myColLike">
-				    		<a href="#"><span class="fui-heart"> 42</span></a>
-			    		</div>
-			    		
-		    		</div>
-		  		</div>
-			</div>
-			<HR>
-			
-			<div class="media" id="id_second" style="display:none">
-		  		<a class="media-left">
-		    		<img src="uploads/myThumb.jpg" alt="uploads/myThumb.jpg">
-		  		</a>
-		  		<div class="media-body">
-		  			<h4 class="media-heading"><a href="">我的滑板鞋</a></h4>
-		  			<div id="listContent">我试图辩称这只是娱乐，哥们儿Gangsta? Naw, courageous balls
-						黑帮，帮，不，我只是有勇气罢了Had to change my style, they said I*m way too soft 帮，不，我只是有勇气罢了Had to change my style, they said I*m way too soft 
-						应该改变我的风帮，不，我只是有勇气罢了Had to change my style, they said I*m way too soft 
-						应该改变我的风帮，不，我只是有勇气罢了Had to change my style, they said I*m way too soft 
-						应该改变我的风
-						应该改变我的风不，我只是有勇气罢了Had to change my style, they said I*m way too soft 
-						应该改变我的风格，他们说我的唱法太软了And I sound like AZ and Nas, out came the claws
-					</div>		
-					<div id="answerInfo">
-						<div id="myColName">
-				    		<span class="fui-user">
-				    		Focus
-				    		</span>
-			    		</div>
-			    		<div id="myColLike">
-			    			<span class="fui-time"> 2014.11.14</span>
-				    		
-			    		</div>
-			    		<div id="myColAns">
-				    		<span class="fui-new"> 3</span>
-			    		</div>
-			    		<div id="myColLike">
-				    		<a href="#"><span class="fui-heart"> 42</span></a>
-			    		</div>
-			    		
-		    		</div>
-		  		</div>
-			</div>
-			<HR>
-			
-		  		
+			<?php
+				$i=1;
+				foreach ($questions as $q) {
+					echo '
+						<div class="media" id="id_'.$i.'" style="display:none">
+					  		<a class="media-left">
+					    		<img src="uploads/head_'.$q->quser.'.jpg" alt="uploads/myThumb.jpg">
+					  		</a>
+			  				<div class="media-body">
+			  					<h4 class="media-heading"><a href="index.php?r=site/questionDetail&qname='.$q->qname.'&qtime='.$q->qtime.'">'.$q->qname.'</a></h4>
+				  				<div id="listContent">'.$q->qcontent.'</div>		
+								<div id="answerInfo">
+									<div id="myColName">
+							    		<span class="fui-user">
+							    		'.$q->quser.'
+							    		</span>
+						    		</div>
+						    		<div id="myColLike">
+						    			<span class="fui-time"> '.$q->qtime.'</span>
+							    		
+						    		</div>
+						    		<div id="myColAns">
+							    		<span class="fui-new"> '.$q->qans.'</span>
+						    		</div>
+						    		<div id="myColLike">
+							    		<a href="#"><span class="fui-heart"> '.$q->qlike.'</span></a>
+						    		</div>
+				    			</div>
+			  				</div>
+						<HR>
+						</div>
+						
+					';
+					$i=$i+1;
+				}
+			?>		  		
 		</div>
 
 	</div>
 
 		<HR>
 
-		<div id="pager">	
+		<div id="pager" style="display:none">	
 			<div class="pagination">
 	            <ul>
+
 	              <li class="previous"><a href="#fakelink" class="fui-arrow-left"></a></li>
-	              <li class="active"><a href="#fakelink">1</a></li>
+	              <li id="id_page1" class="active"><a href="index.php?r=site/list&pageNum=1">1</a></li>
 	              <?php
+	              	echo '<li style="display:none" id="id_prePage">'.$pageNum.'</li>';
 	              	$pages=$pages-1;
 	              	$i=2;
 	              	while ($pages>0) {
-	              	 	echo '<li><a href="#fakelink">'.$i.'</a></li>';
+	              	 	echo '<li id="id_page'.$i.'"><a href="index.php?r=site/list&pageNum='.$i.'">'.$i.'</a></li>';
 	              	 	$i=$i+1;
 	              	 	$pages=$pages-1;
 	              	} 
