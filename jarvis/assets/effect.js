@@ -8,6 +8,22 @@ function mOut(id)
 	document.getElementById(id.id).className="inactive";
 }
 
+function mAnsOver(num)
+{	
+	var id="id_ansNum"+num;
+	var pickId="#myPick"+num;
+	document.getElementById(id).className="media-body ansBorder";
+	$(pickId).fadeIn(300);
+}
+
+function mAnsOut(num)
+{
+	var id="id_ansNum"+num;
+	var pickId="#myPick"+num;
+	document.getElementById(id).className="media-body";
+	$(pickId).fadeOut(300);
+}
+
 
 function validate_required1(field)
 {
@@ -390,6 +406,8 @@ with (thisform)
 function validate_answer()
 {
 	var content=UE.getEditor('answerText').getContent();
+
+
 	var isGuest=document.getElementById('id_flag_isGuest').innerHTML;
 
 	var qname=document.getElementById('id_qname').innerHTML;
@@ -431,6 +449,46 @@ function validate_answer()
 	}
 }
 
+
+function slide_answer()
+{
+	var switchFlag=document.getElementById('id_switchMyAnswer').innerHTML;
+	if(switchFlag==1){
+		$("#id_myAnswer").slideUp(1100);
+		document.getElementById('id_switchMyAnswer').innerHTML=0;
+		setTimeout(function () { 
+			document.getElementById('id_answerArrow').className="fui-triangle-down";
+		},1100); 
+		
+	}else if(switchFlag==0){ 
+		$("#id_myAnswer").slideDown(1100);
+		document.getElementById('id_switchMyAnswer').innerHTML=1;
+		setTimeout(function () { 
+			document.getElementById('id_answerArrow').className="fui-triangle-up";
+		},1100);
+	}
+
+}
+
+function slide_question()
+{
+	var switchFlag=document.getElementById('id_switchMyQuestion').innerHTML;
+	if(switchFlag==1){
+		$("#id_myQuestion").slideUp(1100);
+		document.getElementById('id_switchMyQuestion').innerHTML=0;
+		setTimeout(function () { 
+			document.getElementById('id_questionArrow').className="fui-triangle-down";
+		},1100); 
+		
+	}else if(switchFlag==0){ 
+		$("#id_myQuestion").slideDown(1100);
+		document.getElementById('id_switchMyQuestion').innerHTML=1;
+		setTimeout(function () { 
+			document.getElementById('id_questionArrow').className="fui-triangle-up";
+		},1100);
+	}
+
+}
 
 
 

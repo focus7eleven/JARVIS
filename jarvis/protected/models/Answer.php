@@ -10,6 +10,7 @@ class Answer extends CActiveRecord
 	public $auser;
 	public $alike;
 	public $atime;
+	public $isPicked;
 
 
 	public static function model($className=__CLASS__)

@@ -12,6 +12,8 @@ class Contact extends CActiveRecord
 
 	public $aNum;
 
+	public $points;
+
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -29,7 +31,8 @@ class Contact extends CActiveRecord
             'password' => 'Password',
             'head' => 'Portrait',
             'qNum' => 'Questions',
-            'aNum' => 'Answers'
+            'aNum' => 'Answers',
+            'points' => 'Points'
         );
     }
 

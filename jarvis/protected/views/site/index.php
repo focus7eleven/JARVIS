@@ -38,9 +38,11 @@
 			    		'.Yii::app()->user->name.'
 			    	</div>
 					<div style="text-align: center">
-						<span class="fui-question-circle"> ：0</span>
+						<span class="fui-question-circle"> ：'.$contact->qNum.'</span>
 						<span>&nbsp&nbsp|&nbsp&nbsp&nbsp</span>
-						<span class="fui-alert-circle"> : 0</span>
+						<span class="fui-alert-circle"> : '.$contact->aNum.'</span>
+						<span>&nbsp&nbsp|&nbsp&nbsp&nbsp</span>
+						<span class="fui-paypal"> : '.$contact->points.'</span>
 					</div>
 	    		</div>
 	    		';	

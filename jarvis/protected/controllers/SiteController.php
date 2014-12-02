@@ -55,7 +55,9 @@ class SiteController extends CController
 
     	$questionList=Question::model()->findall();
 
-        $this->render('index',array('questionList'=>$questionList,'model'=>$model));
+    	$contact=Contact::model()->find('username=:userName',array(':userName'=>Yii::app()->user->name));
+
+        $this->render('index',array('questionList'=>$questionList,'model'=>$model,'contact'=>$contact));
 
         
     }
@@ -127,7 +129,14 @@ class SiteController extends CController
 	    	if($model->validate()){	 
 	    		$flag=false;   		
 	    		$question->save();
-	    		$this->render('questionmodal',array('model'=>$question));
+	    		$asker=Contact::model()->find('username=:userName',array(':userName'=>$question->quser));
+	    		$asker->qNum=$asker->qNum+1;
+	    		$asker->points=$asker->points-10;
+	    		$asker->update();
+	    		$ans = Answer::model()->findAll('qnum=:qNum' , array(':qNum'=>$question->qnum));
+
+    			$ans=array_reverse($ans);
+	    		$this->render('questionmodal',array('model'=>$question,'ans'=>$ans));
 	    	}else{ 
 	    		echo "error";
 	    	}
@@ -163,10 +172,17 @@ class SiteController extends CController
     	$ans = Answer::model()->findAll('qnum=:qNum' , array(':qNum'=>$question->qnum));
 
     	$ans=array_reverse($ans);
+    	$pickAns=array();
+    	$i=0;
+    	foreach ($ans as $a) {
+    		if($a->isPicked>0){ 
+    			$pickAns[]=$a;
+    			array_splice($ans,$i,1);
+    		}
+    		$i++;
+    	}
 
-    	//$question=Question::model()->find('qname=:postID', array(':postID'=>$qname));
-    	//$this->render('questionmodal',array('model'=>$question));
-    	$this->render('questionmodal',array('model'=>$question,'ans'=>$ans));
+    	$this->render('questionmodal',array('model'=>$question,'ans'=>$ans,'pickAns'=>$pickAns));
     }
 
     public function actionList($pageNum)
@@ -266,6 +282,7 @@ class SiteController extends CController
         $model->head=$upload;
         $model->qNum=0;
         $model->aNum=0;
+        $model->points=100;
 
         $imgName=$model->username.'.jpg';
 
@@ -305,8 +322,14 @@ class SiteController extends CController
         $answer->qnum=$question->qnum;
         $answer->auser=Yii::app()->user->name;
         $answer->alike=0;
+        $answer->isPicked=0;
         date_default_timezone_set('Asia/Shanghai');
     	$answer->atime=date('H:i:s M.d');
+
+    	$contact=Contact::model()->find('username=:userName',array(':userName'=>$answer->auser));
+        $contact->aNum=$contact->aNum+1;
+        $contact->points=$contact->points+5;
+        $contact->update();
     	
 
     	$question->update();
@@ -322,7 +345,57 @@ class SiteController extends CController
     }
 
     public function actionPerson(){ 
-    	$this->render('person');
+    	$questionList=Question::model()->findAll('quser=:qUser',array(':qUser'=>Yii::app()->user->name));
+    	$questionList=array_reverse($questionList);
+
+    	$contact=Contact::model()->find('username=:userName',array(':userName'=>Yii::app()->user->name));
+		$sql = "SELECT DISTINCT `qnum` FROM `answer` WHERE `answer`.`auser` = '".$contact->username."'";
+    	$command = Yii::app()->db->createCommand($sql);  
+		$results = $command->queryAll();    
+		
+		$ansedQuestion=array();
+		foreach ($results as $r) {
+			$temp=Question::model()->findAll('qnum=:qNum',array(':qNum'=>$r['qnum']));
+			$ansedQuestion=array_merge($ansedQuestion,$temp);
+		}
+
+
+
+        $this->render('person',array('questionList'=>$questionList,'contact'=>$contact,'ansed'=>$ansedQuestion));  
+    }
+
+
+    public function actionPick($num,$qname,$qtime){ 
+    	$pick=Answer::model()->find('anum=:aNum',array(':aNum'=>$num));
+    	$pick->isPicked=1;
+    	$pick->update();
+
+    	$contact=Contact::model()->find('username=:userName',array(':userName'=>$pick->auser));
+        $contact->points=$contact->points+20;
+        $contact->update();
+
+
+    	$question = Question::model()->findByAttributes(array (
+                                'qname' => $qname, 
+                                'qtime' => $qtime
+        ));
+
+    	$ans = Answer::model()->findAll('qnum=:qNum' , array(':qNum'=>$question->qnum));
+
+    	$ans=array_reverse($ans);
+    	$pickAns=array();
+    	$i=0;
+    	foreach ($ans as $a) {
+    		if($a->isPicked>0){ 
+    			$pickAns[]=$a;
+    			array_splice($ans,$i,1);
+    			$i--;
+    		}
+    		$i++;
+    	}
+
+    	$this->render('questionmodal',array('model'=>$question,'ans'=>$ans,'pickAns'=>$pickAns));
+
     }
 
 

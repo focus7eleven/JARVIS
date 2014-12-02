@@ -41,9 +41,9 @@
 
 		<h5></h5>
 
-		<div class="row">
+		<div class="row" id="qcontent">
 			
-			<span class="fui-new"></span>
+			<span class="fui-new" style="margin-left: 30px;"></span>
 			
 			<div id="questionContent">
 				<?php echo $model->qcontent; ?>
@@ -54,7 +54,7 @@
 			if($model->qpic){
 				echo '
 				<div class="row">
-					<span class="fui-image"></span>
+					<span class="fui-image" style="margin-left: 30px;"></span>
 					<div id="questionContent">
 						<img src="uploads/'.$model->qpic.'" alt="image" class="img-rounded img-responsive">
 					</div>
@@ -65,15 +65,55 @@
 			} 
 		?>
 		
+		<?php
+			if(count($pickAns)>0){ 
+				echo '<div class="row" style="margin-top: 40px;">
+					<h4><span class="fui-arrow-right"></span>&nbsp&nbsp 已采纳</h4>
+					</div>
+					<h5></h5>
+					';
 
-		<div id="splash"></div>
+				foreach ($pickAns as $a) {
+				 	echo '
+				 		<div class="row" id="pickAns">
+							<div class="media">
+						  		<a class="media-left">
+						    		<img src="uploads/head_'.$a->auser.'.jpg" alt="uploads/myThumb.jpg">
+						  		</a>
+						  		<div class="media-body">
+						  			<div id="answerContent">'.$a->acontent.'</div>		
+									<div id="answerInfo" style="margin-left:10px;">
+										<div id="myColName">
+								    		<span class="fui-user">
+								    		'.$a->auser.'
+								    		</span>
+							    		</div>
+							    		<div id="myColTime">
+							    			<span class="fui-time"> '.$a->atime.'</span>							    
+							    		</div>
+							    		<div id="myColLike">
+								    		<a href="#"><span class="fui-heart"> '.$a->alike.'</span></a>
+							    		</div>						    		
+						    		</div>
+						  		</div>
+							</div>
+						</div>
+						<HR>
+				 	';
+				}
+			} 
+		?>
 
-		<div class="row">
+
+
+		<div class="row" style="margin-top: 40px;">
 			<h4><span class="fui-arrow-right"></span>&nbsp&nbsp 回答</h4>
 		</div>
-<h5></h5>
+
+		<h5></h5>
 
 		<?php
+			$i=1;
 			foreach ($ans as $a) {
 			 	echo '
 			 		<div class="row">
@@ -81,9 +121,9 @@
 					  		<a class="media-left">
 					    		<img src="uploads/head_'.$a->auser.'.jpg" alt="uploads/myThumb.jpg">
 					  		</a>
-					  		<div class="media-body">
+					  		<div class="media-body" onmouseover="mAnsOver('.$i.')" onmouseout="mAnsOut('.$i.')" id="id_ansNum'.$i.'">
 					  			<div id="answerContent">'.$a->acontent.'</div>		
-								<div id="answerInfo">
+								<div id="answerInfo" style="margin-left:10px;">
 									<div id="myColName">
 							    		<span class="fui-user">
 							    		'.$a->auser.'
@@ -95,6 +135,11 @@
 						    		<div id="myColLike">
 							    		<a href="#"><span class="fui-heart"> '.$a->alike.'</span></a>
 						    		</div>
+
+						    		<div>
+							    		<a href="index.php?r=site/pick&num='.$a->anum.'&qname='.$model->qname.'&qtime='.$model->qtime.'"><span class="fui-check" id="myPick'.$i.'" style="width:100px;float:left;height:30px;
+										display: none;"></span></a>
+						    		</div>
 						    		
 					    		</div>
 					  		</div>
@@ -102,6 +147,7 @@
 					</div>
 					<HR>
 			 	';
+			 	$i++;
 			}
 
 			if(count($ans)==0){ 
@@ -112,7 +158,7 @@
 		
 
 
-		<div id="splash"></div>
+		
 
 		<div class="row">
 			<h4><span class="fui-arrow-right"></span>&nbsp&nbsp 我要回答</h4>
