@@ -1,13 +1,14 @@
 <?php
 
-class Answer entends CActiveRecord
+class Answer extends CActiveRecord
 
 {
 
 	public $acontent;
 	public $anum;
 	public $auser;
-	public $like;
+	public $alike;
+	public $atime;
 
 
 	public static function model($className=__CLASS__)

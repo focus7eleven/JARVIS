@@ -21,22 +21,29 @@ class DetailController extends CController
         
         
         $response=false;
-        if($numUsers==0){
-        	$ques = Question::model()->findByAttributes(array (
-                                'qname' => $model->qname, 
-                                'qtime' => $model->qtime
-                    ));
+        $isGuest=false;
+        if(Yii::app()->user->isGuest){
+        	$isGuest=true;
+        }else{
+        	if($numUsers==0){
+	        	$ques = Question::model()->findByAttributes(array (
+	                                'qname' => $model->qname, 
+	                                'qtime' => $model->qtime
+	                    ));
 
-        	$ques->qlike=$ques->qlike+1;
-			$ques->update();
-			
-        	$model->save();
-        }else if($numUsers>=1){ 
-        	$response=true;
-        }
+	        	$ques->qlike=$ques->qlike+1;
+				$ques->update();
+				
+	        	$model->save();
+	        }else if($numUsers>=1){ 
+	        	$response=true;
+	        }
+   		}
+
+        
         $json = array (  
             'result' => $response,
-            'q' => $ques,
+            'guest' => $isGuest,
     	);  
     	$jsonObj = CJSON::encode( $json );
 

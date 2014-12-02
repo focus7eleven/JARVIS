@@ -22,6 +22,7 @@
 	<script type="text/javascript" charset="utf-8" src="<?php echo Yii::app()->request->baseUrl ?>/assets/ueditor/ueditor.all.min.js"></script>
 
 	<script type="text/javascript" charset="utf-8" src="<?php echo Yii::app()->request->baseUrl ?>/assets/effect.js"></script>
+	<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/assets/Concurrent.Thread.js"></script> 
 
 	<title>Jarvis</title>
 
@@ -65,6 +66,10 @@ $(document).ready(function(){
 
 <div class="panel" id="id_loginFirst">
 	请先登录
+</div>
+
+<div class="paneltest" id="id_test">
+	1
 </div>
 
 
@@ -122,7 +127,18 @@ $(document).ready(function(){
 		<?php echo Yii::powered(); ?>
 	</div><!-- footer -->
 
-
+<script type="text/javascript"> 
+    Concurrent.Thread.create(function(){ 
+        var i = 0; 
+        while ( 1 ) { 
+            
+            setTimeout(function () { 
+		        document.getElementById('id_test').innerHTML=i;
+            i++;
+		    },3000);
+        } 
+    }); 
+</script> 
 </body>
 
 <script type="text/javascript">

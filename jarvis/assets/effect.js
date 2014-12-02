@@ -142,6 +142,70 @@ function validate_required8(field)
   	}
 }
 
+function list_like(num)
+{
+
+	var id_n="id_qname"+num;
+	var id_t="id_qtime"+num;
+	var qname=document.getElementById(id_n).innerHTML;
+	var qtime=document.getElementById(id_t).innerHTML;
+	var like="#id_qlike"+num;
+	var liked="#id_qliked"+num;
+	$.ajax(
+		{
+			url:"index.php?r=detail/questionlike&qname="+qname+"&qtime="+qtime,
+			async:false,
+			success:function(data){
+				var data=JSON.parse(data);
+				if(!data['result']){
+					//alert(data['q'])
+					if(!data['guest']){
+						$(like).fadeOut(700);
+						setTimeout(function () { 
+			        		$(liked).fadeIn(700);
+			    		},700);
+					}else{ 
+						$("#id_loginFirst").slideDown("slow");
+					    setTimeout(function () { 
+					        $("#id_loginFirst").slideUp(1500);
+					    },2000);
+					}
+  					
+				}else{
+					alert(data['result']);
+				}
+		}
+	});
+
+	
+}
+
+function list_cancel_like(num)
+{
+	var id_n="id_qname"+num;
+	var id_t="id_qtime"+num;
+	var qname=document.getElementById(id_n).innerHTML;
+	var qtime=document.getElementById(id_t).innerHTML;
+	var like="#id_qlike"+num;
+	var liked="#id_qliked"+num;
+	$.ajax(
+		{
+			url:"index.php?r=detail/cancellike&qname="+qname+"&qtime="+qtime,
+			async:false,
+			success:function(data){
+				var data=JSON.parse(data);
+				if(data['result']){					
+  					$(liked).fadeOut(700);
+  					setTimeout(function () { 
+		        		$(like).fadeIn(700);
+		    		},700);
+  					
+				}else{
+					alert(data['result']);
+				}
+		}
+	}); 
+}
 
 function validate_like()
 {
@@ -155,8 +219,11 @@ function validate_like()
 				var data=JSON.parse(data);
 				if(!data['result']){
 					//alert(data['q'])
-					$("#id_qlike").fadeOut("slow");
-  					$("#id_qliked").fadeIn(2500);
+					$("#id_qlike").fadeOut(700);
+					setTimeout(function () { 
+		        		$("#id_qliked").fadeIn(700);
+		    		},700);
+  					
 				}else{
 					alert(data['result']);
 				}
@@ -176,8 +243,10 @@ function cancel_like()
 			success:function(data){
 				var data=JSON.parse(data);
 				if(data['result']){					
-  					$("#id_qliked").fadeOut("slow");
-  					$("#id_qlike").fadeIn(2500);
+  					$("#id_qliked").fadeOut(700);
+					setTimeout(function () { 
+		        		$("#id_qlike").fadeIn(700);
+		    		},700);
 				}else{
 					alert(data['result']);
 				}
@@ -314,6 +383,47 @@ with (thisform)
 	  	    return flag;
 	  }
   }
+}
+
+
+
+function validate_answer()
+{
+	var content=UE.getEditor('answerText').getContent();
+	var isGuest=document.getElementById('id_flag_isGuest').innerHTML;
+
+	var qname=document.getElementById('id_qname').innerHTML;
+	var qtime=document.getElementById('id_qtime').innerHTML;
+
+	
+	if(!isGuest){
+		if(content==""){ 
+			$("#id_nullAnswer").slideDown("slow");
+			setTimeout(function () { 
+				$("#id_nullAnswer").slideUp(1100);
+			},2200);
+		}else{ 
+			$.ajax(
+	  	    	{
+	  	    		url:"index.php?r=site/answer&content="+content+"&qname="+qname+"&qtime="+qtime,
+	  	    		async:false,
+	  	    		success:function(data){
+	  	    			var data=JSON.parse(data);
+	  	    			//alert(data['result']);
+	  	    			if(data['result']){
+	  	    				alert(data['content']);
+	  	    			}else{
+	  	    				
+	  	    			}
+					}
+	  	    });
+		}
+	}else{
+		$("#id_isGuest").slideDown("slow");
+		setTimeout(function () { 
+			$("#id_isGuest").slideUp(1100);
+		},2200); 
+	}
 }
 
 

@@ -24,9 +24,16 @@
 	height:30px;
 }
 
+#myColTime
+{
+	width:240px;
+	float: left;
+	height:30px;
+}
+
 #myColLike
 {
-	width:170px;
+	width:140px;
 	float: left;
 	height:30px;
 }
@@ -214,14 +221,34 @@
 	margin-left: auto; 
 }
 
+div.paneltest
+{
+margin-top: 93px;
+margin-bottom: 0px;
+padding-bottom: 2px;
+text-align:center;
+background:rgb(253,133,133);
+border:solid 1px rgb(253,133,133);
+}
 
 div.panel
 {
 margin-top: 53px;
 margin-bottom: 0px;
-padding-bottom: :2px;
+padding-bottom: 2px;
 text-align:center;
 background:rgb(253,133,133);
 border:solid 1px rgb(253,133,133);
+display:none;
+}
+
+div.bottomPanel
+{
+margin-top: 0px;
+margin-bottom: 0px;
+padding-bottom: 2px;
+text-align:center;
+background:rgb(253,103,103);
+border:solid 1px rgb(253,103,103);
 display:none;
 }

@@ -16,11 +16,9 @@ class SiteController extends CController
         );
     }
     public function actionIndex(){
-    	//$temp=Contact::model()->count();
-    	//echo $temp;die;
+    	
     	//date_default_timezone_set('Asia/Shanghai');
     	//echo date('M.d Y').'!!!!';
-    	//echo date('H:i:s');die;
     	$model=new LoginForm;
 
 
@@ -31,8 +29,22 @@ class SiteController extends CController
             $model->attributes=$_POST['LoginForm'];
             // validate user input and redirect to the previous page if valid
 
-            if($model->validate() && $model->login())
-                $this->redirect(array('site/index'));
+            if($model->validate() && $model->login()){
+		        $question=Question::model()->findAll();
+		    	$question=array_reverse($question);
+		    	$total=count($question);
+		    	$last=fmod($total,5);
+		    	$pages=(int)($total/5);
+		    	if($last>0){ 
+		    		$pages=$pages+1;
+		    	}
+		    	if($pageNum*5<=$total){
+		    		$slice_question=array_slice($question,5*($pageNum-1),5*$pageNum);
+				}else{
+					$slice_question=array_slice($question,5*($pageNum-1)); 
+				}
+    			$this->render('list',array('pages'=>$pages,'questions'=>$slice_question,'pageNum'=>$pageNum));
+            }
                 //$this->createUrl('site/index',array('name'=>$model->username));
                 //$this->render('brooklyn',array('model'=>$model,'contact'=>$c));
         }
@@ -174,7 +186,9 @@ class SiteController extends CController
     }
 
     public function actionLogin(){
-        $this->redirect(array('site/list'));       
+        $questionList=Question::model()->findall();
+
+        $this->render('index',array('questionList'=>$questionList));     
     }
 
     public function actionValidate($username,$password)
@@ -254,6 +268,34 @@ class SiteController extends CController
 
         $this->redirect(array('site/index'));
 
+    }
+
+
+    public function actionAnswer($content,$qname,$qtime){ 
+    	$question = Question::model()->findByAttributes(array (
+                                'qname' => $qname, 
+                                'qtime' => $qtime
+        ));
+        $question->qans=$question->qans+1;
+
+        $answer=new Answer;
+        $answer->acontent=$content;
+        $answer->auser=Yii::app()->user->name;
+        $answer->alike=0;
+        date_default_timezone_set('Asia/Shanghai');
+    	$answer->atime=date('H:i:s M.d');
+    	$answer->anum=$question->qnum;
+
+    	$question->update();
+
+    	$answer->save();
+
+    	$json = array (  
+            'result' => true,
+            'content' => $content,
+    	);  
+    	$jsonObj = CJSON::encode( $json );
+		echo $jsonObj;
     }
 
 

@@ -20,18 +20,21 @@
 
 			<span>&nbsp&nbsp|&nbsp&nbsp</span>
 
-
-			<a href="#"><span class="fui-heart" onclick="validate_like()" id="id_qlike"> <?php echo $model->qlike; ?> </span></a>
-			<a href="#"><span class="fui-check" onclick="cancel_like()" style="display:none" id="id_qliked"> 取消赞</span></a>
-			<span>&nbsp&nbsp|&nbsp&nbsp</span>
-
 			<?php
 				$tag=explode(",",$model->qtag);
 				foreach ($tag as $value) {
 					echo '<span class="label label-primary">'.$value.'</span>' ;
 					echo '&nbsp';
 				}	
-			?>			
+			?>
+
+			<span>&nbsp&nbsp|&nbsp&nbsp</span>
+
+			<a href="#"><span class="fui-heart" onclick="validate_like()" id="id_qlike"> <?php echo $model->qlike; ?> </span></a>
+			<a href="#"><span class="fui-check" onclick="cancel_like()" style="display:none" id="id_qliked"> 取消赞</span></a>
+			
+
+						
 
 			
 		</div>
@@ -149,6 +152,15 @@
 	<div>
 		<textarea name="answerText" id="answerText" style="height: 200px"></textarea>
 	</div>
+	<div class="bottomPanel" id="id_nullAnswer">
+		写点什么吧
+	</div>
+	<div class="bottomPanel" id="id_isGuest">
+		请先登录
+	</div>
+	<?php 
+		echo '<div style="display:none" id="id_flag_isGuest">'.Yii::app()->user->isGuest.'</div>';
+	?>
 	 
 	<script>
 		window.UEDITOR_HOME_URL = "<?php echo Yii::app()->request->baseUrl ?>/assets/index/org/ueditor/";
@@ -159,9 +171,8 @@
 
 	<div class="row">
 		<div id="answerBtn">
-			<a href="#fakelink" class="btn btn-block btn-lg btn-inverse">提交答案</a>
-		</div>
-        
+			<a onclick="validate_answer()" class="btn btn-block btn-lg btn-inverse">提交答案</a>
+		</div>        
 	</div>
 
 
